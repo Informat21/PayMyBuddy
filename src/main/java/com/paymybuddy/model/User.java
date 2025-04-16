@@ -3,7 +3,7 @@ package com.paymybuddy.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Connection;
+
 import java.util.Set;
 
 @Entity
@@ -15,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false, unique = true)
     private String email;
