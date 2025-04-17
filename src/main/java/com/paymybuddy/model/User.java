@@ -23,7 +23,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    private String fullName;
+    @Column(nullable = false)
+    private String username;
 
     @OneToMany(mappedBy = "sender")
     private Set<Transaction> sentTransactions;
