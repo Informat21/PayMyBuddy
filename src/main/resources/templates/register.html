@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription - Pay My Buddy</title>
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+</head>
+<body>
+         <div class="header">
+            <button class="paymybuddy-btn">Pay My Buddy</button>
+        </div>
+
+         <form th:action="@{/auth/register}" th:object="${user}" method="post">
+             <input type="text" th:field="*{username}" placeholder="Username" required>
+             <input type="email" th:field="*{email}" placeholder="Mail" required>
+             <input type="password" th:field="*{password}" placeholder="Mot de passe" required>
+             <button type="submit">S’inscrire</button>
+         </form>
+
+
+</body>
+</html>
