@@ -6,17 +6,20 @@
     <link rel="stylesheet" th:href="@{/css/register.css}">
 </head>
 <body>
-         <div class="header">
+    <div class="page-container">
+        <div class="button-container">
             <button class="paymybuddy-btn">Pay My Buddy</button>
         </div>
 
          <form th:action="@{/auth/register}" th:object="${user}" method="post">
-             <input type="text" th:field="*{username}" placeholder="Username" required>
-             <input type="email" th:field="*{email}" placeholder="Mail" required>
-             <input type="password" th:field="*{password}" placeholder="Mot de passe" required>
-             <button type="submit">S’inscrire</button>
+             <input type="text" th:field="*{username}" placeholder="Username" class="input-username" required>
+             <input type="email" th:field="*{email}" placeholder="Mail" class="input-mail" required>
+             <input type="password" th:field="*{password}" placeholder="Mot de passe" class="input-password" required>
+
+             <div class="submit-container">
+                <button type="submit" class="submit-btn">S’inscrire</button>
+             </div>
          </form>
-
-
+    </div>
 </body>
 </html>
