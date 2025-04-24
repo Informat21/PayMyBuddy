@@ -1,10 +1,28 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion - Pay My Buddy</title>
+    <link rel="stylesheet" th:href="@{/css/connexion.css}">
+</head>
+<body>
+<div class="page-container">
+    <div class="button-container">
+        <button class="paymybuddy-btn">Pay My Buddy</button>
+    </div>
 
-<!--</body>-->
-<!--</html>-->
+    <form th:action="@{/connections/add}" th:object="${user}" method="post">
+        <input type="email" th:field="*{email}" placeholder="Mail" class="input-mail" required>
+        <input type="password" th:field="*{password}" placeholder="Mot de passe" class="input-password" required>
+
+        <div class="connect-container">
+            <button type="submit" class="connect-btn">Se connecter</button>
+        </div>
+    </form>
+</div>
+<div class="rectangle-container">
+    <div class="custom-rectangle"></div>
+</div>
+
+</body>
+</html>

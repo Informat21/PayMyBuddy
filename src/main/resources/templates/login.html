@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Connexion - Pay My Buddy</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+
+</head>
+<body>
+<div class="login-container">
+    <h1>Pay My Buddy</h1>
+    <form th:action="@{/auth/login}" method="post" th:object="${loginDTO}">
+        <input type="text" th:field="*{email}" placeholder="Mail" />
+        <input type="password" th:field="*{password}" placeholder="Mot de passe" />
+        <br/>
+        <button type="submit">Se connecter</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.paymybuddy.controller;
 
+import com.paymybuddy.dto.LoginDTO;
 import com.paymybuddy.dto.UserRegistrationDTO;
 import com.paymybuddy.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -27,4 +28,18 @@ public class AuthentificationController {
 
         return userService.register(dto);
     }
+
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("loginDTO", new LoginDTO());
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute("loginDTO") LoginDTO dto) {
+        // logique de connexion ici : vérifier les identifiants
+        // ex : return userService.authenticate(dto) ? "redirect:/home" : "login";
+        return "redirect:/home";
+    }
+
 }
