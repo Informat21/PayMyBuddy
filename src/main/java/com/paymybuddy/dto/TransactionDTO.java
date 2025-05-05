@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 public class TransactionDTO {
     private String senderEmail;
     private String receiverEmail;
-    private Double amount;
+    private String receiverUsername;
+    private BigDecimal amount;
     private String description;
 }
