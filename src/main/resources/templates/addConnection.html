@@ -11,9 +11,9 @@
         <span>Pay My Buddy</span>
         <ul>
             <li><a href="/transactions/transfer">Transférer</a></li>
-            <li><a href="#">Profil</a></li>
-            <li><a href="#" class="active">Ajouter relation</a></li>
-            <li><a href="#">Se déconnecter</a></li>
+            <li><a href="/profil">Profil</a></li>
+            <li><a href="/connections/add" class="active">Ajouter relation</a></li>
+            <li><a href="/logout">Se déconnecter</a></li>
         </ul>
     </nav>
 </header>
@@ -21,6 +21,11 @@
 <main>
     <section class="form-section">
         <label for="email">Chercher une relation</label>
+
+        <!-- MESSAGES -->
+        <div th:if="${success}" th:text="${success}" style="color: green; margin-bottom: 10px;"></div>
+        <div th:if="${error}" th:text="${error}" style="color: red; margin-bottom: 10px;"></div>
+
         <form method="post" th:action="@{/connections/add}">
             <input type="email" id="email" name="email" placeholder="Saisir une adresse mail" required>
             <button type="submit">Ajouter</button>

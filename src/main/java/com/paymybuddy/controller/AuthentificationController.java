@@ -24,7 +24,7 @@ public class AuthentificationController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody UserRegistrationDTO dto) {
+    public String register(@ModelAttribute UserRegistrationDTO dto) {
 
         return userService.register(dto);
     }

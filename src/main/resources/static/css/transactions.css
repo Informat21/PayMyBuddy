@@ -58,10 +58,11 @@ form button {
     border-collapse: collapse;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px: solid #ccc;
 }
 
 .transactions th, .transactions td {
     padding: 1em;
-    border-bottom: 1px solid #eee;
+    border: 1px solid #ccc;
     text-align: left;
 }

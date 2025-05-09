@@ -11,14 +11,16 @@
         <span>Pay My Buddy</span>
         <ul>
             <li><a href="#" class="active">Transférer</a></li>
-            <li><a href="#">Profil</a></li>
-            <li><a href="#">Ajouter relation</a></li>
+            <li><a href="/profil">Profil</a></li>
+            <li><a href="/connections/add">Ajouter relation</a></li>
             <li><a href="#">Se déconnecter</a></li>
         </ul>
     </nav>
 </header>
 <main>
     <form th:action="@{/transactions/send}" method="post">
+        <input type="hidden" name="senderEmail" th:value="${currentUser.email}"/>
+
         <select name="receiverEmail" required>
             <option value="" disabled selected>Sélectionner une relation</option>
             <option th:each="buddy : ${buddies}"
@@ -31,7 +33,7 @@
         <button type="submit">Payer</button>
     </form>
 
-    <section>
+    <section class="transactions">
         <h3>Mes Transactions</h3>
         <table>
             <thead>

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/transactions")
 @RequiredArgsConstructor
@@ -25,8 +27,11 @@ public class TransactionController {
     }
 
     @GetMapping("/transfer")
-    public String showTransferPage(Model model) {
-        String currentUserEmail = "alice@example.com";// À remplacer plus tard par l'utilisateur connecté
+    public String showTransferPage(Model model, Principal principal) {
+        if (principal == null) {
+            return "redirect:/auth/login"; // Redirige vers la page de connexion si l'utilisateur n'est pas authentifié
+        }
+        String currentUserEmail = principal.getName();// Récupère l'email
 
         /*User user = userService.findByEmail(currentUserEmail)
                 .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé pour : " + currentUserEmail));

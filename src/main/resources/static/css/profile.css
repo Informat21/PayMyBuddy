@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: white;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+header nav span {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+nav ul li a.active {
+    color: #007bff;
+    font-weight: bold;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.profile-field {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    font-size: 18px;
+}
+.profile-field span:first-child {
+    font-weight: bold;
+    color: #333;
+    min-width: 120px;
+}
+
+.profile-field span:last-child {
+    color: #555;
+}
+
+button {
+    align-self: flex-end;
+    background-color: #f4a63f;
+    border: none;
+    padding: 10px 30px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #f4a63f;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Page de profil</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+<header>
+    <nav>
+        <span>Pay My Buddy</span>
+        <ul>
+            <li><a href="/transactions/transfer">Transférer</a></li>
+            <li><a href="/profil" class="active">Profil</a></li>
+            <li><a href="/connections/add">Ajouter relation</a></li>
+            <li><a href="/logout">Se déconnecter</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!--<main>-->
+<!--    <section class="profile-section">-->
+<!--        <form th:action="@{/profil/update}" method="post">-->
+<!--        <div class="profile-field">-->
+<!--            <label>Username</label>-->
+<!--            <span>@<span th:text="${user.username}">username</span> ›</span>-->
+<!--        </div>-->
+<!--        <div class="profile-field">-->
+<!--            <label>Mail</label>-->
+<!--            <span></span><span th:text="${user.email}">nom@domain.com > </span> ›</span>-->
+<!--        </div>-->
+<!--        <div class="profile-field">-->
+<!--            <label>Mot de passe</label>-->
+<!--            <span>mot de passe ›</span>-->
+<!--        </div>-->
+<!--        <button>Modifier</button>-->
+<!--    </section>-->
+<!--</main>-->
+<main>
+    <section class="profile-section">
+        <form th:action="@{/profil/update}" method="post">
+            <div class="profile-field">
+                <label>Username</label>
+                <input type="text" name="username" th:value="${user.username}" required />
+            </div>
+            <div class="profile-field">
+                <label>Mail</label>
+                <input type="email" name="email" th:value="${user.email}" readonly />
+            </div>
+            <div class="profile-field">
+                <label>Nouveau mot de passe</label>
+                <input type="password" name="password" placeholder="Laisser vide pour ne pas changer" />
+            </div>
+            <button type="submit">Modifier</button>
+        </form>
+    </section>
+</main>
+
+</body>
+</html>
