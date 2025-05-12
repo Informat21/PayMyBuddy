@@ -10,8 +10,11 @@
         <div class="button-container">
             <button class="paymybuddy-btn">Pay My Buddy</button>
         </div>
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
 
-         <form th:action="@{/auth/register}" th:object="${user}" method="post">
+        <form th:action="@{/auth/register}" th:object="${user}" method="post">
              <input type="text" th:field="*{username}" placeholder="Username" class="input-username" required>
              <input type="email" th:field="*{email}" placeholder="Mail" class="input-mail" required>
              <input type="password" th:field="*{password}" placeholder="Mot de passe" class="input-password" required>

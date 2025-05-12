@@ -24,9 +24,16 @@ public class AuthentificationController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute UserRegistrationDTO dto) {
+    public String register(@ModelAttribute UserRegistrationDTO dto, Model model) {
+        String result = userService.register(dto);
 
-        return userService.register(dto);
+        if ("User registered successfully".equals(result)){
+            return "redirect:/auth/login"; // Redirige vers la page de connexion après l'inscription
+        } else {
+            model.addAttribute("error", result); // Ajoute le message d'erreur au modèle
+            return "register"; // Reste sur la page d'inscription en cas d'erreur
+        }
+        //return userService.register(dto);
     }
 
     @GetMapping("/login")
@@ -37,8 +44,7 @@ public class AuthentificationController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute("loginDTO") LoginDTO dto) {
-        // logique de connexion ici : vérifier les identifiants
-        // ex : return userService.authenticate(dto) ? "redirect:/home" : "login";
+
         return "redirect:/home";
     }
 

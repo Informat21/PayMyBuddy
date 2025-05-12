@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
@@ -27,7 +28,7 @@ public class User {
     private String username;
 
     @Column(nullable = false)
-    private double balance;
+    private BigDecimal balance = BigDecimal.valueOf(1000.00);
 
     @OneToMany(mappedBy = "sender")
     private Set<Transaction> sentTransactions;

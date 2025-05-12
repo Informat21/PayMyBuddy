@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 
 @Controller
@@ -32,6 +33,8 @@ public class ProfileController {
         UserDTO userDTO = new UserDTO();
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
+        userDTO.setBalance(BigDecimal.valueOf(10000.00)); // Remise à 100 000€
+        userDTO.setBalance(user.getBalance());
 
         model.addAttribute("user", userDTO);
         return "profil"; // Correspond à profile.html dans /templates/

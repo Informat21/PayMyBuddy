@@ -51,6 +51,11 @@
                 <label>Nouveau mot de passe</label>
                 <input type="password" name="password" placeholder="Laisser vide pour ne pas changer" />
             </div>
+            <div class="profile-field">
+                <span>Solde</span>
+                <span th:text="${user.balance + ' €'}">0.0 €</span>
+            </div>
+
             <button type="submit">Modifier</button>
         </form>
     </section>

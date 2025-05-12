@@ -7,6 +7,7 @@ import com.paymybuddy.repository.TransactionRepository;
 import com.paymybuddy.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,26 +20,87 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final UserRepository userRepository;
+    @Transactional
+    public void createTransaction(TransactionDTO dto) {
+        User sender = userRepository.findByEmail(dto.getSenderEmail())
+                .orElseThrow(() -> new IllegalArgumentException("Expéditeur introuvable : " + dto.getSenderEmail()));
+        User receiver = userRepository.findByEmail(dto.getReceiverEmail())
+                .orElseThrow(() -> new IllegalArgumentException("Destinataire introuvable : " + dto.getReceiverEmail()));
 
-    public String createTransaction(TransactionDTO dto) {
-        User sender = userRepository.findByEmail(dto.getSenderEmail()).orElse(null);
-        User receiver = userRepository.findByEmail(dto.getReceiverEmail()).orElse(null);
-
-        if (sender == null || receiver == null) {
-            return "Sender or Receiver not found";
+        BigDecimal amount = dto.getAmount();
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Le montant doit être supérieur à zéro");
         }
 
+        // Initialisation des soldes si null
+        if (sender.getBalance() == null) sender.setBalance(BigDecimal.ZERO);
+        if (receiver.getBalance() == null) receiver.setBalance(BigDecimal.ZERO);
+
+        // Vérifie les fonds
+        if (sender.getBalance().compareTo(amount) < 0) {
+            throw new IllegalArgumentException("Fonds insuffisants pour effectuer le transfert");
+        }
+
+        // Effectue le transfert
+        sender.setBalance(sender.getBalance().subtract(amount));
+        receiver.setBalance(receiver.getBalance().add(amount));
+
+        // Enregistre la transaction
         Transaction transaction = Transaction.builder()
                 .sender(sender)
                 .receiver(receiver)
-                .amount(dto.getAmount())
+                .amount(amount)
                 .description(dto.getDescription())
                 .timestamp(LocalDateTime.now())
                 .build();
 
         transactionRepository.save(transaction);
-        return "Transaction successful";
+
+        // Sauvegarde les nouveaux soldes
+        userRepository.save(sender);
+        userRepository.save(receiver);
     }
+
+
+//    @Transactional
+//    public String createTransaction(TransactionDTO dto) {
+//        User sender = userRepository.findByEmail(dto.getSenderEmail()).orElse(null);
+//        User receiver = userRepository.findByEmail(dto.getReceiverEmail()).orElse(null);
+//
+//        if (sender == null || receiver == null) {
+//            throw new IllegalArgumentException("Sender or Receiver not found");
+//        }
+//
+//        BigDecimal amount = dto.getAmount();
+//        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+//            return "Amount must be greater than zero";
+//        }
+//
+//        // Vérifie que le solde est suffisant
+//        if (sender.getBalance().compareTo(amount) < 0) {
+//            return "Fonds insuffisants";
+//        }
+//
+//        // Déduction et crédit
+//        sender.setBalance(sender.getBalance().subtract(amount));
+//        receiver.setBalance(receiver.getBalance().add(amount));
+//
+//        Transaction transaction = Transaction.builder()
+//                .sender(sender)
+//                .receiver(receiver)
+//                .amount(dto.getAmount())
+//                .description(dto.getDescription())
+//                .timestamp(LocalDateTime.now())
+//                .build();
+//
+//        transactionRepository.save(transaction);
+//
+//        // Sauvegarde des soldes mis à jour
+//        userRepository.save(sender);
+//        userRepository.save(receiver);
+//
+//        return "Transaction successful";
+//    }
 
     public List<TransactionDTO> findAllBySender(String senderEmail) {
         User sender = userRepository.findByEmail(senderEmail)
