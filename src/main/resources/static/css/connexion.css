@@ -1,4 +1,4 @@
-/* Contexte de positionnement pour top/left */
+
 .page-container {
     position: relative;
     width: 100%;
@@ -11,7 +11,7 @@
     left: 613px;
 }
 
-/* Style du bouton */
+
 .paymybuddy-btn {
     width: 214px;
     height: 64px;
@@ -62,14 +62,14 @@
     box-sizing: border-box;
 }
 
-/* Conteneur positionné précisément */
+
 .connect-container {
     position: absolute;
     top: 728px;
     left: 617px;
 }
 
-/* Style du bouton Se connecter */
+
 .connect-btn {
     width: 205px;
     height: 64px;
@@ -100,7 +100,7 @@
     height: 688px;
     background-color: #D9D9D9;
     border: 1px solid #000000;
-    border-radius: 0; /* ou ajoute une valeur si tu veux des coins arrondis */
+    border-radius: 0;
 }
 
 

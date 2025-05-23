@@ -4,17 +4,18 @@ import com.paymybuddy.dto.LoginDTO;
 import com.paymybuddy.dto.UserRegistrationDTO;
 import com.paymybuddy.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-//@RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthentificationController {
 
-    private final UserService userService;
+    @Autowired
+    private  UserService userService;
 
     // Affiche le formulaire d'inscription
     @GetMapping("/register")
@@ -31,9 +32,10 @@ public class AuthentificationController {
             return "redirect:/auth/login"; // Redirige vers la page de connexion après l'inscription
         } else {
             model.addAttribute("error", result); // Ajoute le message d'erreur au modèle
+            model.addAttribute("user", dto);
             return "register"; // Reste sur la page d'inscription en cas d'erreur
         }
-        //return userService.register(dto);
+
     }
 
     @GetMapping("/login")

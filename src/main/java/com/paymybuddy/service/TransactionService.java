@@ -62,45 +62,6 @@ public class TransactionService {
     }
 
 
-//    @Transactional
-//    public String createTransaction(TransactionDTO dto) {
-//        User sender = userRepository.findByEmail(dto.getSenderEmail()).orElse(null);
-//        User receiver = userRepository.findByEmail(dto.getReceiverEmail()).orElse(null);
-//
-//        if (sender == null || receiver == null) {
-//            throw new IllegalArgumentException("Sender or Receiver not found");
-//        }
-//
-//        BigDecimal amount = dto.getAmount();
-//        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-//            return "Amount must be greater than zero";
-//        }
-//
-//        // Vérifie que le solde est suffisant
-//        if (sender.getBalance().compareTo(amount) < 0) {
-//            return "Fonds insuffisants";
-//        }
-//
-//        // Déduction et crédit
-//        sender.setBalance(sender.getBalance().subtract(amount));
-//        receiver.setBalance(receiver.getBalance().add(amount));
-//
-//        Transaction transaction = Transaction.builder()
-//                .sender(sender)
-//                .receiver(receiver)
-//                .amount(dto.getAmount())
-//                .description(dto.getDescription())
-//                .timestamp(LocalDateTime.now())
-//                .build();
-//
-//        transactionRepository.save(transaction);
-//
-//        // Sauvegarde des soldes mis à jour
-//        userRepository.save(sender);
-//        userRepository.save(receiver);
-//
-//        return "Transaction successful";
-//    }
 
     public List<TransactionDTO> findAllBySender(String senderEmail) {
         User sender = userRepository.findByEmail(senderEmail)

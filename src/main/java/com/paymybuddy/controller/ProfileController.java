@@ -33,8 +33,7 @@ public class ProfileController {
         UserDTO userDTO = new UserDTO();
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
-        userDTO.setBalance(BigDecimal.valueOf(10000.00)); // Remise à 100 000€
-        userDTO.setBalance(user.getBalance());
+        userDTO.setBalance(BigDecimal.valueOf(10000.00));
 
         model.addAttribute("user", userDTO);
         return "profil"; // Correspond à profile.html dans /templates/
